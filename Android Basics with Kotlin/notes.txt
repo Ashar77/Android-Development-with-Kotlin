@@ -1,0 +1,106 @@
+An "abstract" class is a class that cannot be instantiated because it is not fully implemented
+
+If the values of properties and implementations of functions are not known
+
+
+Inheritance in kotlin
+======================
+
+
+import kotlin.math.PI
+import kotlin.math.sqrt
+
+
+fun main() {
+	val squareCabin = SquareCabin(6,3.5)
+    with(squareCabin) {
+    println("\nSquare Cabin\n============")
+    println("Capacity: ${capacity}")
+    println("Material: ${buildingMaterial}")
+    println("Has room? ${hasRoom()}")
+    getRoom()
+    println("Floor area: ${floorArea()}")
+    
+
+}
+   val roundHut = RoundHut(4,1.0) 
+   with(roundHut) {
+    println("\n Round Hut\n============")
+    println("Capacity: ${capacity}")
+    println("Material: ${buildingMaterial}")
+    println("Has room? ${hasRoom()}")
+    getRoom()
+    println("Floor area: ${floorArea()}")
+    println("Carpet size: ${calculateMaxCarpetSize()}")
+
+
+}
+   val roundTower = RoundTower(3,6.0)
+   with(roundTower){
+       println("\n Round Tower\n============")
+    println("Capacity: ${capacity}")
+    println("Material: ${buildingMaterial}")
+    println("Has room? ${hasRoom()}")
+    println("floors: ${roundTower.floors}")
+    println("Floor area: ${floorArea()}")
+    println("Carpet size: ${calculateMaxCarpetSize()}")
+
+
+   }
+
+    
+}
+
+abstract class Dwelling(private var residents : Int){
+      abstract  val buildingMaterial : String
+      abstract val capacity : Int
+      fun hasRoom(): Boolean{
+          return capacity > residents
+      }
+      abstract fun floorArea() : Double 
+     fun getRoom() {
+     if (capacity > residents) {
+         residents++
+         println("You got a room!")
+    } else {
+        println("Sorry, at capacity and no rooms left.")
+    }
+}
+    
+    }
+
+class SquareCabin(residents : Int , val length : Double) : Dwelling(residents){
+    override val buildingMaterial = "Wood"
+    override val capacity = 6
+    override fun floorArea() : Double {
+        return (length * length)
+        
+    } 
+    
+}
+
+
+open class RoundHut(residents : Int, val radius : Double) : Dwelling(residents){
+    override val buildingMaterial = "Straw"
+    override val capacity = 7
+    override fun floorArea() : Double {
+            return PI * radius * radius
+    } 
+    
+    fun calculateMaxCarpetSize(): Double {
+    val diameter = 2 * radius
+    return sqrt(diameter * diameter / 2)
+}
+    
+}
+
+class RoundTower(residents: Int, radius : Double ,val floors : Int = 2) : RoundHut(residents , radius){
+    override val buildingMaterial = "Stone"
+    override val capacity = floors * 4
+    override fun floorArea(): Double{
+            return super.floorArea() * floors
+    }
+    
+}
+
+
