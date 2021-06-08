@@ -5,8 +5,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    private val forecastRepository = ForecastRepository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,14 +32,23 @@ class MainActivity : AppCompatActivity() {
             }
 
             else{
-                Toast.makeText(this,zipcode+" is entered",Toast.LENGTH_SHORT).show()
+            //    Toast.makeText(this,zipcode+" is entered",Toast.LENGTH_SHORT).show()
+                  forecastRepository.loadForecast(zipcode)
             }
+
+            val forecastList : RecyclerView = findViewById(R.id.RVforecastList)
+            forecastList.layoutManager = LinearLayoutManager(this);
 
 
 
 
         }
 
+        val weeklyForecastObserver = Observer<List<DailyForcast>> {
+            forecastItems -> Toast.makeText(this,"data updated",Toast.LENGTH_SHORT).show()
+        }
+
+        forecastRepository.weeklyForcast.observe(this,weeklyForecastObserver)
 
     }
 

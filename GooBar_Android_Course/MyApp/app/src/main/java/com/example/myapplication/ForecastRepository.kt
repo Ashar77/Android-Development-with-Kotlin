@@ -14,5 +14,7 @@ class ForecastRepository {
         val forecastItems = randomvalues.map{
             temp -> DailyForcast(temp,"partly cloudy")
         }
+
+        _weeklyForecast.setValue(forecastItems)
     }
 }

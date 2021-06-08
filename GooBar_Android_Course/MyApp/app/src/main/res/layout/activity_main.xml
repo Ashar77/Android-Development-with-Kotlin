@@ -62,4 +62,17 @@
         app:layout_constraintStart_toStartOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/icon" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVforecastList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#ABABAB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterzipbutton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
